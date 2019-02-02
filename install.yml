@@ -1,0 +1,22 @@
+- name: Install required Packages git epel-release
+  yum:
+    update_cache: yes
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - epel-release
+    - net-tools
+
+- name: Install required Packages python-pip
+  yum:
+    update_cache: yes
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-pip
+
+- name: clone repo {{ repo_url }}
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ repo_path }}"

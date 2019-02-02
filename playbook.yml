@@ -1,0 +1,11 @@
+--- # Playbook to run Jenkins job
+- hosts: all
+  become: true
+  become_method: sudo
+  vars:
+    repo_url: "https://git.openstack.org/openstack/python-jenkins"
+    repo_path: "/webapps/devops"
+
+  tasks:
+    - name: Include install playbook
+      include: install.yml

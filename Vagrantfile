@@ -6,6 +6,13 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
   end
   config.vm.provision "docker" do |d|
-    d.run "ggnanasekaran77/jenkins", ports: "8080:8080"
+    d.run "ggnanasekaran77/jenkins", ports: [ "127.0.0.1:8080:8080" ]
   end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+  end
+  config.vm.provision "shell", inline: <<-SHELL
+    cd /webapps/devops
+    echo "Running sudo python setup.py install"
+  SHELL
 end
