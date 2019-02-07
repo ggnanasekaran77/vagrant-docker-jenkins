@@ -20,3 +20,16 @@
   git:
     repo: "{{ repo_url }}"
     dest: "{{ repo_path }}"
+
+- name: pip install docker-py
+  pip:
+    name: docker-py
+
+- name: application container
+  docker_container:
+    name: ggnanasekaran77-jenkins
+    image: ggnanasekaran77/jenkins
+    state: started
+    pull: yes
+    ports:
+      - "8080:8080"
