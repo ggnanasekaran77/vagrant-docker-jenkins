@@ -1,20 +1,14 @@
 - name: Install required Packages git epel-release
   yum:
     update_cache: yes
-    name: "{{ item }}"
+    name: ['git', 'epel-release', 'net-tools']
     state: present
-  with_items:
-    - git
-    - epel-release
-    - net-tools
 
 - name: Install required Packages python-pip
   yum:
     update_cache: yes
-    name: "{{ item }}"
+    name: ['python-pip']
     state: present
-  with_items:
-    - python-pip
 
 - name: clone repo {{ repo_url }}
   git:
@@ -25,10 +19,17 @@
   pip:
     name: docker-py
 
+- name: Building Jenkins Docker Image
+  docker_image:
+    path: /vagrant
+    name: ggnanasekaran77/gatd-devops-jenkins
+    force: yes
+    push: yes
+
 - name: application container
   docker_container:
-    name: ggnanasekaran77-jenkins
-    image: ggnanasekaran77/jenkins
+    name: "gatd_devops_jenkins"
+    image: "ggnanasekaran77/gatd-devops-jenkins"
     state: started
     pull: yes
     ports:

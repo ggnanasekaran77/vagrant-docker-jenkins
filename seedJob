@@ -1,0 +1,20 @@
+def user = 'ggnanasekaran77'
+def repoApi = new URL("https://api.github.com/users/${user}/repos")
+def repos = new groovy.json.JsonSlurper().parse(repoApi .newReader())
+repos.each {
+    def repoName = it.name
+    println "Repo Name" +  repoName
+
+   multibranchPipelineJob("${repoName}") {
+       branchSources {
+           git {
+               remote("https://github.com/ggnanasekaran77/${repoName}.git")
+           }
+       }
+       orphanedItemStrategy {
+           discardOldItems {
+               numToKeep(20)
+           }
+       }
+   }
+}

@@ -1,0 +1,10 @@
+#!groovy
+
+import jenkins.model.*
+
+Jenkins.instance.getAllItems().each { job ->
+    if (!job.name.contains('deleteJob') && !job.name.contains('seedJob')){
+        println job.name
+        job.delete()
+    }
+}

@@ -8,6 +8,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "docker"
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
+    ansible.verbose = true
+    ansible.start_at_task = "Building Jenkins Docker Image"
+    ansible.compatibility_mode = "2.0"
   end
   config.vm.provision "shell", inline: <<-SHELL
     cd /webapps/devops
