@@ -1,8 +1,13 @@
 - name: Install required Packages git epel-release
   yum:
     update_cache: yes
-    name: ['git', 'epel-release', 'net-tools']
     state: present
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - git
+    - epel-release
+    - net-tools
 
 - name: Install required Packages python-pip
   yum:
