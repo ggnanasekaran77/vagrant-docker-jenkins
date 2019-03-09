@@ -23,14 +23,14 @@
   docker_image:
     path: /vagrant
     name: ggnanasekaran77/gatd-devops-jenkins
-    force: yes
-    push: yes
+    #force: yes
+    #push: yes
 
 - name: application container
   docker_container:
     name: "gatd_devops_jenkins"
     image: "ggnanasekaran77/gatd-devops-jenkins"
     state: started
-    pull: yes
+    #pull: yes
     ports:
       - "8080:8080"
