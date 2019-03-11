@@ -5,7 +5,7 @@ repos.each {
     def repoName = it.name
     println "Repo Name" +  repoName
 
-   multibranchPipelineJob("${user}/${repoName}") {
+   multibranchPipelineJob("${repoName}") {
        branchSources {
            git {
                remote("https://github.com/ggnanasekaran77/${repoName}.git")
